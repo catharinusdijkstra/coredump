@@ -119,9 +119,8 @@ c     =======================================================================
       INTEGER iWARNING, iERROR, iCUMM                                           
       COMMON /status/ iWARNING, iERROR, iCUMM                                   
       INTEGER i, j, Nanal, error                                                
-      DOUBLE PRECISION xaux(Nanal), yaux(Nanal), coeff(Nanal), A(npY,npY),          
+      DOUBLE PRECISION xaux(Nanal), yaux(Nanal), coeff(4), A(npY,npY),          
      &               m, aux, b                                                  
-
       error = 0                                                                 
 c     generate matrix A and vector B                                            
       DO i = 1, Nanal                                                           
