@@ -8651,17 +8651,13 @@ c         interpolate to Dusty's wavelength grid
 999   RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
-                                                                                
-                                                                                
 
       SUBROUTINE GetProp(npL,lambda,nL,Fname,en,ek,error)                       
-c =======================================================================       
-c This subroutine reads optical properties en(i,j), ek(i,j) from file           
-c fname(Nf), with i=Nf, j=1..NLL(Nf), and interpolates them onto                
-c wavelength grid lambda(1..nL)                        [Z.I., Mar. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine reads optical properties en(i,j), ek(i,j) from file           
+c     fname(Nf), with i=Nf, j=1..NLL(Nf), and interpolates them onto                
+c     wavelength grid lambda(1..nL)                        [Z.I., Mar. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       CHARACTER*235 Fname                                                       
       CHARACTER*232 line                                                        
@@ -8722,15 +8718,13 @@ c     interpolate
 999   RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE GETsizes(NN,N,x1,x2,x)                                         
-c =======================================================================       
-c This subroutine generates an array x(i=1..N) of physical size NN,             
-c with N elements logarithmically spaced between x1 and x2.                     
-c                                              [ZI,Aug'96;MN,Nov'97]            
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine generates an array x(i=1..N) of physical size NN,             
+c     with N elements logarithmically spaced between x1 and x2.                     
+c                                                  [ZI,Aug'96;MN,Nov'97]            
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER NN, N, i                                                          
       DOUBLE PRECISION x(NN), x1, x2, fac, pw1, pw2                             
@@ -8749,14 +8743,12 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE getTau(model,nG,TAU1,TAU2,TAUin,Nrec,GridType,Nmodel)          
-c =======================================================================       
-c This subroutine generates total optical depth TAUtot.                         
-c                                                      [Z.I., Mar. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine generates total optical depth TAUtot.                         
+c                                                          [Z.I., Mar. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -8841,20 +8833,17 @@ c     extinction efficiency at fiducial wavelength
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
-                                                                                
 
       SUBROUTINE getETAzp(ETAzp)                                                
-c =======================================================================       
-c This function calculates ETAzp(iP,iZ) along the line of sight with            
-c impact parameter P(iP) and iZ=1, nZ. Here iZ = 1 corresponds to z=0           
-c and iZ=nZ to the outer edge. Other grid points coincide with the              
-c radial grid. The method used is spline approximation for normalized           
-c density distribution ETA, with subsequent z-integration performed             
-c analytically in function IntETA                                               
-c                                               [ZI,Feb'95; MN,Aug'97]          
-c =======================================================================       
+c     =======================================================================       
+c     This function calculates ETAzp(iP,iZ) along the line of sight with            
+c     impact parameter P(iP) and iZ=1, nZ. Here iZ = 1 corresponds to z=0           
+c     and iZ=nZ to the outer edge. Other grid points coincide with the              
+c     radial grid. The method used is spline approximation for normalized           
+c     density distribution ETA, with subsequent z-integration performed             
+c     analytically in function IntETA                                               
+c                                                   [ZI,Feb'95; MN,Aug'97]          
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -8914,15 +8903,14 @@ c           add next step in ETAzp
 
       RETURN                                                                    
       END                                                                       
-
                                                                                 
 
       DOUBLE PRECISION FUNCTION IMAGFN(y)                                       
-c =======================================================================       
-c This function evaluates auxiliary functions needed to produce                 
-c visibility curves and convolved images. It is called from the image           
-c integration subroutine ROMBY.                        [Z.I., Jan. 1997]        
-c =======================================================================       
+c     =======================================================================       
+c     This function evaluates auxiliary functions needed to produce                 
+c     visibility curves and convolved images. It is called from the image           
+c     integration subroutine ROMBY.                        [Z.I., Jan. 1997]        
+c     =======================================================================       
       IMPLICIT none                                                             
       DOUBLE PRECISION x, y, PSFN, Bessel                                       
       INTEGER ftype                                                             
@@ -8945,18 +8933,17 @@ c       q*theta1, like in IE, '96, MNRAS 279, 1019)
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE MIE(npL,nL,lambda,Ere,Eim,npA,nA,a,nG1,Qabs,Qsca)              
-c =======================================================================       
-c This subroutine calculates Qabs and Qsca for a given diffractive              
-c index Ere, Eim, wavelength lambda and size a. Here, lambda is an              
-c array (1..nL), Ere and Eim are given on this array, a is an array             
-c of sizes (1..nA). Qabs and Qsca are arrays (nG1..nG1+nA,nL), i.e. for         
-c each wavelength lambda, Qabs and Qsca are evaluated for nA different          
-c sizes. The numbering, however, does not start from 1, but rather from         
-c nG1.                                                [Z.I., Aug. 1996]         
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine calculates Qabs and Qsca for a given diffractive              
+c     index Ere, Eim, wavelength lambda and size a. Here, lambda is an              
+c     array (1..nL), Ere and Eim are given on this array, a is an array             
+c     of sizes (1..nA). Qabs and Qsca are arrays (nG1..nG1+nA,nL), i.e. for         
+c     each wavelength lambda, Qabs and Qsca are evaluated for nA different          
+c     sizes. The numbering, however, does not start from 1, but rather from         
+c     nG1.                                                [Z.I., Aug. 1996]         
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npL, nL, npA, nA, nG1, iL, iA                                     
       DOUBLE PRECISION lambda(npL), Ere(npL), Eim(npL), a(npA),                 
@@ -8985,17 +8972,15 @@ c         store the result
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       DOUBLE PRECISION FUNCTION PSFN(x)                                         
-c =======================================================================       
-c This function evaluates the point spread function. For psftype.EQ.1           
-c the function is evaluated as a sum of two Gaussians, for psftype.EQ.2         
-c it is provided by user in a file. psftype and all other relevant              
-c parameters come from COMMON /psf/ and are initialized in subroutine           
-c INPUT.                                               [Z.I., Jan. 1997]        
-c =======================================================================       
+c     =======================================================================       
+c     This function evaluates the point spread function. For psftype.EQ.1           
+c     the function is evaluated as a sum of two Gaussians, for psftype.EQ.2         
+c     it is provided by user in a file. psftype and all other relevant              
+c     parameters come from COMMON /psf/ and are initialized in subroutine           
+c     INPUT.                                               [Z.I., Jan. 1997]        
+c     =======================================================================       
       IMPLICIT none                                                             
       DOUBLE PRECISION x                                                        
       INTEGER idummy                                                            
@@ -9018,20 +9003,18 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE setupETA                                                       
-c =======================================================================       
-c This subroutine finds spline coefficients ETAcoef (defined in file            
-c 'density.inc') such that normalized density function ETA(Y(iY)) is:           
-c ETAcoef(iY,1)+ETAcoef(iY,2)/Y(iY)+...+ETAcoef(iY,2)/Y(iY)^3                   
-c If spline approximation differs more than maxerr (see below) at the           
-c midpoint, then a straight line is used instead. (In case of wavelength        
-c depend. ETA, use ETAfun where any new dens. laws should be described).        
-c Coefficients ETAcoef are later used in getETAzp to calculate ETAzp.           
-c                                                [ZI, Feb'96; MN,Aug'97]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine finds spline coefficients ETAcoef (defined in file            
+c     'density.inc') such that normalized density function ETA(Y(iY)) is:           
+c     ETAcoef(iY,1)+ETAcoef(iY,2)/Y(iY)+...+ETAcoef(iY,2)/Y(iY)^3                   
+c     If spline approximation differs more than maxerr (see below) at the           
+c     midpoint, then a straight line is used instead. (In case of wavelength        
+c     depend. ETA, use ETAfun where any new dens. laws should be described).        
+c     Coefficients ETAcoef are later used in getETAzp to calculate ETAzp.           
+c                                                    [ZI, Feb'96; MN,Aug'97]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9078,15 +9061,14 @@ c       copy coefficients to the output array ETAcoef
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       DOUBLE PRECISION FUNCTION SizeDist(q,aa,sdtype,a0)                        
-c =======================================================================       
-c This subroutine calculates size distribution n(a) for a=aa. The size          
-c distribution is MRN type n(a)~1/a**q for sdtype.LE.2 and KMH type             
-c n(a)~dexp(-a/a0)/a**q otherwise                                               
-c                                                      [Z.I., Aug. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine calculates size distribution n(a) for a=aa. The size          
+c     distribution is MRN type n(a)~1/a**q for sdtype.LE.2 and KMH type             
+c     n(a)~dexp(-a/a0)/a**q otherwise                                               
+c                                                          [Z.I., Aug. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER sdtype                                                            
       DOUBLE PRECISION aa, a0, q                                                
@@ -9100,13 +9082,12 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE Spectral(model,denstyp,nL,Lambda)                              
-c =======================================================================       
-c     This subroutine finds the spectral features for spp and zpp files.        
-c     It employs SpFeatur().		       		     [MN, Jan'99]                        
-c =======================================================================       
+c     =======================================================================       
+c         This subroutine finds the spectral features for spp and zpp files.        
+c         It employs SpFeatur().		       		     [MN, Jan'99]                        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9162,14 +9143,13 @@ c     find features for *.zpp file
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE SpFeatur(model,nL,Lambda,Spectr,Charac)                        
-c =======================================================================       
-c This subroutine calculates IRAS colors and other spectral quantities          
-c Filters data from Neugebauer et al, 1984, ApJ, 278, L1.                       
-c Procedure described in Bedijn, 1987, A&A, 186, 136.  [Z.I., Mar. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine calculates IRAS colors and other spectral quantities          
+c     Filters data from Neugebauer et al, 1984, ApJ, 278, L1.                       
+c     Procedure described in Bedijn, 1987, A&A, 186, 136.  [Z.I., Mar. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9208,7 +9188,7 @@ c     initialization
          al(4,j) = w4(j)                                                        
          phi(4,j) = f4(j)                                                       
        END DO                                                                   
-c ------------------------------------------------------------------------      
+c     ------------------------------------------------------------------------      
 c     first find IRAS colors                                                    
       DO j = 2, nL                                                              
 c       middle wavelength                                                       
@@ -9267,14 +9247,13 @@ c     store SpecChar to output array SpecChar
 
       RETURN                                                                    
       END                                                                       
-c *******************************************************************           
                                                                                 
-c *******************************************************************           
+
       SUBROUTINE PHILAM(Alam,F,Al,Phi)                                          
 c     interpolates IRAS filters [f(4)] for a given wavelength alam              
       IMPLICIT DOUBLE PRECISION(A-H,O-Z)                                        
       DIMENSION Phi(4,7), Al(4,7), F(4)                                         
-c -----------------------------------------------                               
+c     -----------------------------------------------                               
       DO i = 1, 4                                                               
         F(i) = 0.0                                                              
         im = 0                                                                  
@@ -9291,18 +9270,17 @@ c -----------------------------------------------
             IF (im.EQ.6) istop = 1                                              
         END DO                                                                  
       END DO                                                                    
-c ------------------------------------------------------                        
+c     ------------------------------------------------------                        
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE Visibili(IntOut)                                               
-c =======================================================================       
-c This subroutine finds visibility functions corresponding to IntOut.           
-c The work horse is subroutine Visi2D, and this subroutine is used to           
-c prepare everything.                                  [Z.I., Jan. 1997]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine finds visibility functions corresponding to IntOut.           
+c     The work horse is subroutine Visi2D, and this subroutine is used to           
+c     prepare everything.                                  [Z.I., Jan. 1997]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9366,28 +9344,26 @@ c         check dynamic range
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE Visi2D(NinMax,Nin,Xin,Yin,Noutmax,Nout,Xout,Yout)              
-c =======================================================================       
-c This subroutine finds the visibility function (the spatial Fourier            
-c transform of the intensity distribution) corresponding to the                 
-c intensity Yin(Xin[i]), i=1,Nin. Visibility, Yout, is evaluated at q           
-c positions (spatial frequency) given in Xout[i], i=1,Nout. Maximum size        
-c of Xin is NinMax, maximum size of Xout is NoutMax. The Bessel function        
-c of the zeroth order is provided separately. The integration is done by        
-c calling subroutine ROMBY (Bessel function is called from IMGFN).              
-c Note:                                                                         
-c The visibility function V(q) for a circularly symmetric intensity             
-c I(x) is:                                                                      
-c          V(q) = F(q)/F(0)                                                     
-c where Jo is the Bessel function of the zeroth order, and                      
-c          F(q) = Int[Jo(2Pi*q*x)*I(x)*2Pi*x*dx]                                
-c Note that F(0) is nothing more than flux. For more details see                
-c Ivezic & Elitzur, 1996, MNRAS, 279, 1019 and ref. therein.                    
-c                                                      [Z.I., Jan. 1997]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine finds the visibility function (the spatial Fourier            
+c     transform of the intensity distribution) corresponding to the                 
+c     intensity Yin(Xin[i]), i=1,Nin. Visibility, Yout, is evaluated at q           
+c     positions (spatial frequency) given in Xout[i], i=1,Nout. Maximum size        
+c     of Xin is NinMax, maximum size of Xout is NoutMax. The Bessel function        
+c     of the zeroth order is provided separately. The integration is done by        
+c     calling subroutine ROMBY (Bessel function is called from IMGFN).              
+c     Note:                                                                         
+c     The visibility function V(q) for a circularly symmetric intensity             
+c     I(x) is:                                                                      
+c              V(q) = F(q)/F(0)                                                     
+c     where Jo is the Bessel function of the zeroth order, and                      
+c              F(q) = Int[Jo(2Pi*q*x)*I(x)*2Pi*x*dx]                                
+c     Note that F(0) is nothing more than flux. For more details see                
+c     Ivezic & Elitzur, 1996, MNRAS, 279, 1019 and ref. therein.                    
+c                                                          [Z.I., Jan. 1997]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER NinMax, Nin, NoutMax, Nout, iq, iXin                              
       DOUBLE PRECISION Xin(NinMax), Yin(NinMax), Xout(NoutMax),                 
@@ -9431,74 +9407,67 @@ c     flux
       END                                                                       
 
                                                                                 
+c     ======================================================================        
+c     This is the file with auxiliary math and number-to-string conversion          
+c     subroutines.                                             [MN, Mar,99]         
+c     ======================================================================        
+C         Table of Contents                                                         
+C                                                                                   
+C         ADD                                                                       
+C         ADD2                                                                      
+C         ANALINT                                                                   
+C         Attach                                                                    
+C         BESSEL                                                                    
+C         BHMIE                                                                     
+C         CHKRANGE                                                                  
+C         CHKSPLIN                                                                  
+C         Clean                                                                     
+C         EMPTY                                                                     
+C         FileMSG                                                                   
+C         FindErr                                                                   
+C         FINDMAX                                                                   
+C         FINDRMS                                                                   
+C         GETFS                                                                     
+C         H                                                                         
+C         KRON                                                                      
+C         LINE                                                                      
+C         LININTER                                                                  
+C         LINSYS                                                                    
+C         LUBKSB                                                                    
+C         LUDCMP                                                                    
+C         MAKETABLE                                                                 
+C         MAPLE3                                                                    
+C         MIDSQL                                                                    
+C         MPROVE                                                                    
+C         MSG                                                                       
+C         MULTIPLY                                                                  
+C         MULTIP2                                                                   
+C         MYSPLINE                                                                  
+C         POLINT                                                                    
+C         POWERINT                                                                  
+C         PRODUCT                                                                   
+C         ROMBERG2                                                                  
+C         ROMBY                                                                     
+C         SCALETO1                                                                  
+C         SHIFT                                                                     
+C         SIMPSON                                                                   
+C         SORT                                                                      
+C         SPLINE                                                                    
+C         SPLINE2                                                                   
+C         SPLINT                                                                    
+C         TRAPZD                                                                    
+C         WriteOut                                                                  
+C         ZBRAC                                                                     
+C         ZRIDDR                                                                    
+c     ======================================================================        
                                                                                 
                                                                                 
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-c ======================================================================        
-c This is the file with auxiliary math and number-to-string conversion          
-c subroutines.                                             [MN, Mar,99]         
-c ======================================================================        
-C     Table of Contents                                                         
-C                                                                               
-C     ADD                                                                       
-C     ADD2                                                                      
-C     ANALINT                                                                   
-C     Attach                                                                    
-C     BESSEL                                                                    
-C     BHMIE                                                                     
-C     CHKRANGE                                                                  
-C     CHKSPLIN                                                                  
-C     Clean                                                                     
-C     EMPTY                                                                     
-C     FileMSG                                                                   
-C     FindErr                                                                   
-C     FINDMAX                                                                   
-C     FINDRMS                                                                   
-C     GETFS                                                                     
-C     H                                                                         
-C     KRON                                                                      
-C     LINE                                                                      
-C     LININTER                                                                  
-C     LINSYS                                                                    
-C     LUBKSB                                                                    
-C     LUDCMP                                                                    
-C     MAKETABLE                                                                 
-C     MAPLE3                                                                    
-C     MIDSQL                                                                    
-C     MPROVE                                                                    
-C     MSG                                                                       
-C     MULTIPLY                                                                  
-C     MULTIP2                                                                   
-C     MYSPLINE                                                                  
-C     POLINT                                                                    
-C     POWERINT                                                                  
-C     PRODUCT                                                                   
-C     ROMBERG2                                                                  
-C     ROMBY                                                                     
-C     SCALETO1                                                                  
-C     SHIFT                                                                     
-C     SIMPSON                                                                   
-C     SORT                                                                      
-C     SPLINE                                                                    
-C     SPLINE2                                                                   
-C     SPLINT                                                                    
-C     TRAPZD                                                                    
-C     WriteOut                                                                  
-C     ZBRAC                                                                     
-C     ZRIDDR                                                                    
-c ======================================================================        
-                                                                                
-                                                                                
-c **********************************************************************        
       SUBROUTINE ADD(np1,nr1,np2,nr2,q1,q2,q3,qOut)                             
-c ======================================================================        
-c This subroutine evaluates the following expression:                           
-c [qOut] = [q1] + [q2] + [q3]. qout, q1, q2 and q2 are matrices of              
-c physical size (np2,np1) and real size (nr2,nr1).     [Z.I., Nov. 1995]        
-c ======================================================================        
+c     ======================================================================        
+c     This subroutine evaluates the following expression:                           
+c     [qOut] = [q1] + [q2] + [q3]. qout, q1, q2 and q2 are matrices of              
+c     physical size (np2,np1) and real size (nr2,nr1).     [Z.I., Nov. 1995]        
+c     ======================================================================        
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9506,7 +9475,7 @@ c ======================================================================
       INTEGER  np1, nr1, np2, nr2, i2, i1                                       
       DOUBLE PRECISION  q1(np2,np1), q2(np2,np1), q3(np2,np1),                  
      &       qOut(np2,np1)                                                      
-c ----------------------------------------------------------------------        
+
 c     loop over index 2                                                         
       DO i2 = 1, nr2                                                            
 c       loop over index 1                                                       
@@ -9514,17 +9483,16 @@ c       loop over index 1
           qOut(i2,i1) = q1(i2,i1) +  q2(i2,i1) + q3(i2,i1)                      
         END DO                                                                  
       END DO                                                                    
-c ----------------------------------------------------------------------        
+
       RETURN                                                                    
       END                                                                       
-c **********************************************************************        
+
                                                                                 
-c **********************************************************************        
       SUBROUTINE ADD2(flxS,flxE,fBSum,nY)                                       
-c ======================================================================        
-c This subroutine is auxiliary for finding the bolometric                       
-c components of the scattered and emitted diffuse flux.   [MN, May'99]          
-c ======================================================================        
+c     ======================================================================        
+c     This subroutine is auxiliary for finding the bolometric                       
+c     components of the scattered and emitted diffuse flux.   [MN, May'99]          
+c     ======================================================================        
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9532,28 +9500,27 @@ c ======================================================================
       INTEGER nY, iY                                                            
       DOUBLE PRECISION flxS(npL,npY), flxE(npL,npY), flxSB(npY),                
      &          flxEB(npY), fBSum(npY)                                          
-c ----------------------------------------------------------------------        
+
       CALL Bolom(flxS,flxSB)                                                    
       CALL Bolom(flxE,flxEB)                                                    
       DO iY = 1, nY                                                             
         fBSum(iY) = flxSB(iY) + flxEB(iY)                                       
       END DO                                                                    
-c ----------------------------------------------------------------------        
+
       RETURN                                                                    
       END                                                                       
-c **********************************************************************        
+
                                                                                 
-c **********************************************************************        
       SUBROUTINE ANALINT(Nanal,xaux,yaux,m,aux,error)                           
-c ======================================================================        
-c This subroutine calculates integral I(x**m*y(x)*dx). Both y and x are         
-c 1D arrays, y(i), x(i) with i=1,Nanal. The method used is approximation        
-c of y(x) by y = P(x) + d/sqrt(1-x*x), where P(x) is the polynomial of          
-c order Nanal-1, and analytic evaluation of the integral. It is assumed         
-c that xaux(1)=0. Coefficients are determined from the set of Nanal             
-c linear equations and subsequent call to the linear system solver              
-c LINSYS.                                              [Z.I., Nov. 1995]        
-c =======================================================================       
+c     ======================================================================        
+c     This subroutine calculates integral I(x**m*y(x)*dx). Both y and x are         
+c     1D arrays, y(i), x(i) with i=1,Nanal. The method used is approximation        
+c     of y(x) by y = P(x) + d/sqrt(1-x*x), where P(x) is the polynomial of          
+c     order Nanal-1, and analytic evaluation of the integral. It is assumed         
+c     that xaux(1)=0. Coefficients are determined from the set of Nanal             
+c     linear equations and subsequent call to the linear system solver              
+c     LINSYS.                                              [Z.I., Nov. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9563,7 +9530,7 @@ c =======================================================================
       INTEGER i, j, Nanal, error                                                
       DOUBLE PRECISION xaux(Nanal), yaux(Nanal), coeff(4), A(npY,npY),          
      &               m, aux, b                                                  
-c ----------------------------------------------------------------------        
+
       error = 0                                                                 
 c     generate matrix A and vector B                                            
       DO i = 1, Nanal                                                           
@@ -9608,11 +9575,10 @@ c     add contribution from the polynom
 999   RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE Attach(root,length,ext,fname)                                  
 c     Attaches extensions to the root cleaned by Clean                          
-c =======================================================================       
+c     =======================================================================       
       CHARACTER*(*) root, ext, fname                                            
       INTEGER i, length                                                         
 
@@ -9625,17 +9591,15 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE Clean(StrIn, StrOut, Length)                                   
-c =======================================================================       
+c     =======================================================================       
 c     Find meaningful part of StrIn without leading and trailing junk           
 c     It is returned left-justified in StrOut, right-padded with blanks         
 c     The number of meaningful characters is returned in Length.                
 c     In case of any problems, StrOut is empty. This sub should be used to      
 c     clean every input filename immediately after DUSTY reads it. [ME,'99]     
-c =======================================================================       
+c     =======================================================================       
       CHARACTER*(*) StrIn, StrOut                                               
       INTEGER i, first, last, Length                                            
 
@@ -9662,13 +9626,12 @@ c     Now trim all junk:
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       DOUBLE PRECISION FUNCTION Bessel(x)                                       
-c =======================================================================       
-c This function evaluates the Bessel function of the zeroth kind.               
-c Formulae are from Abramowitz & Stegun.               [Z.I., Jan. 1997]        
-c =======================================================================       
+c     =======================================================================       
+c     This function evaluates the Bessel function of the zeroth kind.               
+c     Formulae are from Abramowitz & Stegun.               [Z.I., Jan. 1997]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER i                                                                 
       DOUBLE PRECISION x, c(6), Pi                                              
@@ -9693,19 +9656,15 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
-c This subroutine obtained from prof. P. Menguc, Dept. of Mechanical            
-c Eng., University of Kentucky.                        [Z.I., Aug. 1996]        
-
-c     __________________________________________________________________        
-c                                                                               
+c     __________________________________________________________________                                                                             
+c     This subroutine obtained from prof. P. Menguc, Dept. of Mechanical            
+c     Eng., University of Kentucky.                        [Z.I., Aug. 1996]        
+c
 c     SUBROUTINE BHMIE CALCULATES AMPLITUDE SCATTERING MATRIX ELEMENTS          
-C     & EFFICIENCIES FOR EXTINCTION, TOTAL SCATTERING AND BACSCATTERING,        
-C     FOR A GIVEN SIZE PARAMETER AND RELATIVE REFRACTIVE INDEX                  
-C     __________________________________________________________________        
-C                                                                               
+c     & EFFICIENCIES FOR EXTINCTION, TOTAL SCATTERING AND BACSCATTERING,        
+c     FOR A GIVEN SIZE PARAMETER AND RELATIVE REFRACTIVE INDEX                  
+c     __________________________________________________________________        
       subroutine bhmie (x,refrel,nang,s1,s2,qext,qsca,qback)                    
       dimension amu(100),theta(100),pi(100),tau(100),pi0(100),pi1(100)          
       complex d(3000),y,refrel,xi,xi0,xi1,an,bn,s1(200),s2(200)                 
@@ -9723,11 +9682,9 @@ c     ___________________________________________________________________
       do 555 j = 1,nang                                                         
       theta(j)= (float(j)-1.)*dang                                              
 555   amu(j)=cos(theta(j))                                                      
-c     __________________________________________________________________        
+
 c     logarithmic derivative d(j) calculated by downward recurrence             
 c     beginning with initial value 0.0 + i*0.0 at j = nmx                       
-c     __________________________________________________________________        
-c                                                                               
       d(nmx)=cmplx(0.0,0.0)                                                     
       nn=nmx-1                                                                  
       do 120 n=1,nn                                                             
@@ -9743,11 +9700,9 @@ c
       s1(j)=cmplx(0.0,0.0)                                                      
       s2(j)=cmplx(0.0,0.0)                                                      
 777   continue                                                                  
-c     __________________________________________________________________        
+
 c     riccati bessel functions with real argument x calculated by upward        
 c     recurrence                                                                
-c     __________________________________________________________________        
-c                                                                               
       psi0=cos(dx)                                                              
       psi1=sin(dx)                                                              
       chi0=-sin(x)                                                              
@@ -9803,39 +9758,36 @@ c
       end                                                                       
 
                                                                                 
-c***********************************************************************        
       SUBROUTINE CHKRANGE(dr,x)                                                 
-c=======================================================================        
-c This subroutine checks if x is within the allowed range defined by            
-c dr<<1:                                                                        
-c         dr**2 < x < 1/dr**2                                                   
-c If it is not then x = 0.0                            [Z.I., Jan. 1997]        
-c=======================================================================        
+c     =======================================================================        
+c      This subroutine checks if x is within the allowed range defined by            
+c      dr<<1:                                                                        
+c              dr**2 < x < 1/dr**2                                                   
+c      If it is not then x = 0.0                            [Z.I., Jan. 1997]        
+c     =======================================================================        
       IMPLICIT none                                                             
       DOUBLE PRECISION x, dr                                                    
-c-----------------------------------------------------------------------        
+
       IF ((x-dr*dr)*(x-1./dr/dr).LT.0.0) THEN                                   
         continue                                                                
       ELSE                                                                      
-c        continue                                                               
         x = 0.0                                                                 
       END IF                                                                    
-c-----------------------------------------------------------------------        
+
       RETURN                                                                    
       END                                                                       
-c***********************************************************************        
                                                                                 
 
       SUBROUTINE CHKSPLIN(x,fun,funmid,N,coef,maxerr,RDW)                       
-c ======================================================================        
-c This subroutine checks the spline coefficients coef(i,j):                     
-c fun(x)=coef(i,1) + coef(i,2)*x + coef(i,3)*x^2 + coef(i,4)*x^3,               
-c for x(i).LE.x.LE.x(i+1) with i=1..N. Array funmid(1..N-1) contains the        
-c values of function fun at mid points defined as                               
-c xmid(i)=SQRT(x(i)*x(i+1). If spline approximation produces error              
-c greater than maxerr, or funmid<0, a straight line is produced between         
-c x(i) and x(i+1).                                                              
-c ======================================================================        
+c     ======================================================================        
+c     This subroutine checks the spline coefficients coef(i,j):                     
+c     fun(x)=coef(i,1) + coef(i,2)*x + coef(i,3)*x^2 + coef(i,4)*x^3,               
+c     for x(i).LE.x.LE.x(i+1) with i=1..N. Array funmid(1..N-1) contains the        
+c     values of function fun at mid points defined as                               
+c     xmid(i)=SQRT(x(i)*x(i+1). If spline approximation produces error              
+c     greater than maxerr, or funmid<0, a straight line is produced between         
+c     x(i) and x(i+1).                                                              
+c     ======================================================================        
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9844,7 +9796,7 @@ c ======================================================================
       DOUBLE PRECISION x(npY), fun(npY), funmid(npY), coef(npY,4),              
      &       maxerr, error, slope, xmid, funSpline, aux, power, yR, yL          
       LOGICAL RDW                                                               
-c ---------------------------------------------------------                     
+
 c       check the midpoints                                                     
         DO i = 1, N - 1                                                         
           xmid = dsqrt(x(i)*x(i+1))                                             
@@ -9882,23 +9834,21 @@ c         check for the logarithmic derivative (only for RDW)
             END IF                                                              
           END IF                                                                
         END DO                                                                  
-c ---------------------------------------------------------                     
+
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE CHKSPLINold(x,fun,funmid,N,coef,maxerr)                        
-c =======================================================================       
-c This subroutine checks the spline coefficients coef(i,j):                     
-c fun(x)=coef(i,1) + coef(i,2)*x + coef(i,3)*x^2 + coef(i,4)*x^3,               
-c for x(i).LE.x.LE.x(i+1) with i=1..N. Array funmid(1..N-1) contains the        
-c values of function fun at mid points defined as                               
-c xmid(i)=SQRT(x(i)*x(i+1). If spline approximation produces error              
-c greater than maxerr, or funmid<0, a straight line is produced between         
-c x(i) and x(i+1).                                     [Z.I., Feb. 1995]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine checks the spline coefficients coef(i,j):                     
+c     fun(x)=coef(i,1) + coef(i,2)*x + coef(i,3)*x^2 + coef(i,4)*x^3,               
+c     for x(i).LE.x.LE.x(i+1) with i=1..N. Array funmid(1..N-1) contains the        
+c     values of function fun at mid points defined as                               
+c     xmid(i)=SQRT(x(i)*x(i+1). If spline approximation produces error              
+c     greater than maxerr, or funmid<0, a straight line is produced between         
+c     x(i) and x(i+1).                                     [Z.I., Feb. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -9932,14 +9882,13 @@ c       check the midpoints
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       INTEGER FUNCTION EMPTY(line)                                              
-c =======================================================================       
-c This function is 1 if string 'line' is empty, or if it contains only          
-c '%', and 0 otherwise.                                                         
-c                                                      [Z.I., Nov. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This function is 1 if string 'line' is empty, or if it contains only          
+c     '%', and 0 otherwise.                                                         
+c                                                          [Z.I., Nov. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER i, iTeX, l                                                        
       CHARACTER ch                                                              
@@ -9958,14 +9907,12 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE FileMSG(fname,strg)                                            
-c =======================================================================       
-c     Prints a message in *.out file in case of error opening the user          
-c     supplied files.                                                           
-c =======================================================================       
+c     =======================================================================       
+c         Prints a message in *.out file in case of error opening the user          
+c         supplied files.                                                           
+c     =======================================================================       
       IMPLICIT NONE                                                             
       CHARACTER aux*230, strg*(*), fname*(*)                                    
       INTEGER length, Empty                                                     
@@ -9988,13 +9935,12 @@ c =======================================================================
       STOP                                                                      
       END                                                                       
 
-                                                                                
-c *************************************************************************     
+
       SUBROUTINE FindErr(fbol,maxFerr,nY)                                       
-c ========================================================================      
-c This subroutine finds maximum err in flux conservation for both               
-c spherical and slab case as (fmax-fmin)/(fmax+fmin)   [MN,Aug'99]              
-c =========================================================================     
+c     ========================================================================      
+c     This subroutine finds maximum err in flux conservation for both               
+c     spherical and slab case as (fmax-fmin)/(fmax+fmin)   [MN,Aug'99]              
+c     =========================================================================     
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -10035,15 +9981,13 @@ c     bad solution; overall flux cannot be negative
 
       RETURN                                                                    
       END                                                                       
-c *************************************************************************     
-                                                                                
                                                                                 
 
       SUBROUTINE FindMax(NN,i1,i2,A,Amax)                                       
-c =======================================================================       
-c This subroutine finds maximum values, Amax, of an array A(nY) between         
-c values A(i1) and A(i2).                              [Z.I., Jul. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine finds maximum values, Amax, of an array A(nY) between         
+c     values A(i1) and A(i2).                              [Z.I., Jul. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER NN, i1, i2, i                                                     
       DOUBLE PRECISION A(NN), Amax                                              
@@ -10056,17 +10000,14 @@ c     loop over radial positions
 
       RETURN                                                                    
       END                                                                       
-c =======================================================================       
-                                                                                
-                                                                                
-                                                                                
+
 
       SUBROUTINE FindRMS(typ,X,val,accur,N)                                     
-c =======================================================================       
-c Finds relative deviations 'accur' of an array X(N) from a given value val.    
-c For typ=1 accur is maximal deviation, and for typ=2 the rms deviation.        
-c                                                         [ZI'95; MN'99]        
-c =======================================================================       
+c     =======================================================================       
+c     Finds relative deviations 'accur' of an array X(N) from a given value val.    
+c     For typ=1 accur is maximal deviation, and for typ=2 the rms deviation.        
+c                                                             [ZI'95; MN'99]        
+c     =======================================================================       
       IMPLICIT NONE                                                             
       INTEGER N, i, typ                                                         
       DOUBLE PRECISION X(N), val, accur, ss, dev                                
@@ -10089,19 +10030,18 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE GetFS(xx,nm,flag,str)                                          
-c =======================================================================       
-c This subroutine writes number xx to a string str according to a format        
-c f?.nm. Here ? stands for the number of needed places. A blank is              
-c inserted at the beginning, and for flag.NE.1 another one if number is         
-c positive. If xx<0 second blank is replaced by '-'. For example, for           
-c flag=0 and xx = -0.1234E+02, calling this subroutine with nm=1 will           
-c result in str = ' -12.3', while xx = 0.0123 with nm=3 gives '  0.012'.        
-c If flag=1 minus will be ignored, for example xx = -0.1234E+02 and nm=1        
-c will result in str = ' 12.3',                        [Z.I., Nov. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine writes number xx to a string str according to a format        
+c     f?.nm. Here ? stands for the number of needed places. A blank is              
+c     inserted at the beginning, and for flag.NE.1 another one if number is         
+c     positive. If xx<0 second blank is replaced by '-'. For example, for           
+c     flag=0 and xx = -0.1234E+02, calling this subroutine with nm=1 will           
+c     result in str = ' -12.3', while xx = 0.0123 with nm=3 gives '  0.012'.        
+c     If flag=1 minus will be ignored, for example xx = -0.1234E+02 and nm=1        
+c     will result in str = ' 12.3',                        [Z.I., Nov. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       CHARACTER ch                                                              
       CHARACTER*(*) str                                                         
@@ -10176,14 +10116,12 @@ c     now copy all nm remaining decimal digits to str
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       DOUBLE PRECISION FUNCTION H(x1,x2)                                        
-c =======================================================================       
-c This function calculates the step function: H=1 for x1 >= x2 and H=0          
-c for x1 < x2.                                         [Z.I., Nov. 1995]        
-c =======================================================================       
+c     =======================================================================       
+c     This function calculates the step function: H=1 for x1 >= x2 and H=0          
+c     for x1 < x2.                                         [Z.I., Nov. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       DOUBLE PRECISION x1, x2                                                   
 
@@ -10196,15 +10134,13 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       INTEGER FUNCTION Kron(i1,i2)                                              
-c =======================================================================       
-c This function is Kronecker delta-function defined as:                         
-c Kron(i1,i2) = 1 for i1=i2                                                     
-c Kron(i1,i2) = 0 otherwise.                           [Z.I., Dec. 1995]        
-c =======================================================================       
+c     =======================================================================       
+c     This function is Kronecker delta-function defined as:                         
+c     Kron(i1,i2) = 1 for i1=i2                                                     
+c     Kron(i1,i2) = 0 otherwise.                           [Z.I., Dec. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER i1, i2                                                            
 
@@ -10217,16 +10153,13 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
-                                                                                
 
       SUBROUTINE LINE(com,typ,unt)                                              
-c =======================================================================       
-c This subroutine writes a line into file open as unt. For type = 1             
-c the line is '---', and for type = 2 '==='.If com=1 a comment sign # is        
-c added in the beginning (this is when line is used in file headers)            
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine writes a line into file open as unt. For type = 1             
+c     the line is '---', and for type = 2 '==='.If com=1 a comment sign # is        
+c     added in the beginning (this is when line is used in file headers)            
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER com, typ, unt                                                     
 
@@ -10249,14 +10182,13 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE LinInter(NN,N,x,y,xloc,iNloc,yloc)                             
-c =======================================================================       
-c This subroutine performs linear interpolation for y(x) such that              
-c yloc = y(xloc). It is assumed that x is monotonously increasing.              
-c                                                      [Z.I., Mar. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine performs linear interpolation for y(x) such that              
+c     yloc = y(xloc). It is assumed that x is monotonously increasing.              
+c                                                          [Z.I., Mar. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER NN, N, i, istop, iNloc                                            
       DOUBLE PRECISION x(NN), y(NN), xloc, yloc                                 
@@ -10285,21 +10217,18 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
-                                                                                
 
       SUBROUTINE LINSYS(Nreal,A,B,X,error)                                      
-c =======================================================================       
-c This subroutine solves the set of linear equations [A]*[X] = [B] for          
-c X [A(k,1)*X(1)+A(k,2)*X(2)+...+A(k,Nreal)*X(Nreal) = B(k), k=1,Nreal).        
-c The real size of matrix A is Nreal x Nreal and its physical dimension         
-c is npY x npY, where npY comes from INCLUDE 'userpar.inc'. Both vectors        
-c B and X have real lengths Nreal. The set is solved by calls to LUDCMP         
-c and LUBKSB and the solution is improved subsequently by a call to             
-c MPROVE. These three subroutines are taken from Numerical Recipes.             
-c                                                      [Z.I., Nov. 1995]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine solves the set of linear equations [A]*[X] = [B] for          
+c     X [A(k,1)*X(1)+A(k,2)*X(2)+...+A(k,Nreal)*X(Nreal) = B(k), k=1,Nreal).        
+c     The real size of matrix A is Nreal x Nreal and its physical dimension         
+c     is npY x npY, where npY comes from INCLUDE 'userpar.inc'. Both vectors        
+c     B and X have real lengths Nreal. The set is solved by calls to LUDCMP         
+c     and LUBKSB and the solution is improved subsequently by a call to             
+c     MPROVE. These three subroutines are taken from Numerical Recipes.             
+c                                                          [Z.I., Nov. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -10309,8 +10238,8 @@ c =======================================================================
       DOUBLE PRECISION A1(npY,npY), B1(npY), A2(npY,npY), B2(npY), d            
 
       error = 0                                                                 
-c generate DOUBLE PRECISION copies of A and B (two copies because they          
-c are changed in LUDCMP and LUBKSB, but still needed for MPROVE)                
+c     generate DOUBLE PRECISION copies of A and B (two copies because they          
+c     are changed in LUDCMP and LUBKSB, but still needed for MPROVE)                
       DO i = 1, Nreal                                                           
         B1(i) = B(i)                                                            
         B2(i) = B(i)                                                            
@@ -10333,13 +10262,12 @@ c     copy the improved solution to output vector X
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE LUBKSB(A,N,NP,INDX,B)                                          
-c =======================================================================       
+c     =======================================================================       
       DIMENSION INDX(NP)                                                        
       DOUBLE PRECISION A(NP,NP),B(NP)                                           
-c -------------------------------------------------------------------           
+
       II=0                                                                      
       DO 12 I=1,N                                                               
       LL=INDX(I)                                                                
@@ -10363,19 +10291,18 @@ c -------------------------------------------------------------------
       ENDIF                                                                     
       B(I)=SUM/A(I,I)                                                           
 14    CONTINUE                                                                  
-c -------------------------------------------------------------------           
+
       RETURN                                                                    
       END                                                                       
-
                                                                                 
 
       SUBROUTINE LUDCMP(A,N,NP,INDX,D,error)                                    
-c =======================================================================       
+c     =======================================================================       
       PARAMETER (NMAX=10000,TINY=1.0E-20)                                       
       DIMENSION INDX(NP)                                                        
       INTEGER error                                                             
       DOUBLE PRECISION A(NP,NP),VV(NMAX), D, SUM                                
-c -------------------------------------------------------------------           
+
       error = 0                                                                 
       D = 1.                                                                    
       DO I = 1, N                                                               
@@ -10383,7 +10310,6 @@ c -------------------------------------------------------------------
        DO J = 1, N                                                              
         IF (DABS(A(I,J)).GT.AAMAX) AAMAX=DABS(A(I,J))                           
        END DO                                                                   
-c       IF (AAMAX.EQ.0.) PAUSE 'Singular matrix.'                               
        IF (AAMAX.EQ.0.) THEN                                                    
         error = 5                                                               
         RETURN                                                                  
@@ -10436,20 +10362,18 @@ c       IF (AAMAX.EQ.0.) PAUSE 'Singular matrix.'
        ENDIF                                                                    
       END DO                                                                    
       IF(A(N,N).EQ.0.)A(N,N)=TINY                                               
-c -------------------------------------------------------------------           
+
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE MakeTable(Elems,rows,cols,unt)                                 
-c =======================================================================       
-c     This is an auxiliary subroutine for print out of tables                   
-c     of Elems(cols,rows) in output unit 'unt'. rows = max{npL,npY}.            
-c     This array is defined in PrOut as well and if you change its size         
-c     make sure you do this in both places.                 [MN, Mar'98]        
-c =======================================================================       
+c     =======================================================================       
+c         This is an auxiliary subroutine for print out of tables                   
+c         of Elems(cols,rows) in output unit 'unt'. rows = max{npL,npY}.            
+c         This array is defined in PrOut as well and if you change its size         
+c         make sure you do this in both places.                 [MN, Mar'98]        
+c     =======================================================================       
       IMPLICIT NONE                                                             
       INTEGER rows, cols, unt, k, i                                             
       DOUBLE PRECISION Elems(25,200)                                            
@@ -10461,14 +10385,13 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE Maple3(w,z,p,MpInt)                                            
-c =======================================================================       
-c This function calculates indefinite integral:                                 
-c    MpInt(iC) = INT(w^(2-iC) / sqrt(w^2-p^2) * dw), for iC=1,2,3,4.            
-c                                                      [Z.I., Apr. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This function calculates indefinite integral:                                 
+c        MpInt(iC) = INT(w^(2-iC) / sqrt(w^2-p^2) * dw), for iC=1,2,3,4.            
+c                                                          [Z.I., Apr. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       DOUBLE PRECISION w, z, p, MpInt(4)                                        
 
@@ -10486,10 +10409,9 @@ c     integrals
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE midsql(funk,aa,bb,s,n)                                         
-c =======================================================================       
+c     =======================================================================       
       INTEGER n                                                                 
       DOUBLE PRECISION aa,bb,s,funk                                             
       EXTERNAL funk                                                             
@@ -10520,10 +10442,9 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE MPROVE(A,ALUD,N,NP,INDX,B,X)                                   
-c =======================================================================       
+c     =======================================================================       
       PARAMETER (NMAX=10000)                                                    
       DIMENSION INDX(N)                                                         
       DOUBLE PRECISION SDP,A(NP,NP),ALUD(NP,NP),B(N),X(N),R(NMAX)               
@@ -10543,13 +10464,12 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE MSG(msgno)                                                     
-c =======================================================================       
-c This subroutine writes runtime messages to auxiliary file fname.m##           
-c or to the output file fname.out.             [ZI,Feb'96; MN,Jul'99]           
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine writes runtime messages to auxiliary file fname.m##           
+c     or to the output file fname.out.             [ZI,Feb'96; MN,Jul'99]           
+c     =======================================================================       
       IMPLICIT none                                                             
       CHARACTER*100 zline(999)                                                  
       INTEGER iINP, iSUM, iOUT, iVerb, iSPP, iA, iB, iC, iX, NlambdaOut,        
@@ -10710,17 +10630,15 @@ c     msg 14 is not called in this version.
 101   RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE MULTIPLY(type,np1,nr1,np2,nr2,mat,vec1,omat,flag,q1,q2)        
-c =======================================================================       
-c This subroutine evaluates the following expression:                           
-c [q2] = flag*[q1] + [mat]*[tt*vec1]. Here tt is [omat] for type=1 and          
-c 1-[omat] for type=2. mat is matrix of physical size (np2,np1,np1) and         
-c real size (nr2,nr1,nr1). omat, vec1, q1 and q2 are matrices of                
-c physical size (np2,np1) and real size (nr2,nr1).     [Z.I., Nov. 1995]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine evaluates the following expression:                           
+c     [q2] = flag*[q1] + [mat]*[tt*vec1]. Here tt is [omat] for type=1 and          
+c     1-[omat] for type=2. mat is matrix of physical size (np2,np1,np1) and         
+c     real size (nr2,nr1,nr1). omat, vec1, q1 and q2 are matrices of                
+c     physical size (np2,np1) and real size (nr2,nr1).     [Z.I., Nov. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -10755,20 +10673,17 @@ c         loop over dummy index (multiplication)
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
-                                                                                
 
       SUBROUTINE MULTIP2(type,np1,nr1,np2,nr2,nr3,np3,mat,vec1,omat,q1)         
-c =======================================================================       
-c This subroutine evaluates the following expression:                           
-c [q1] = [mat]*[tt*vec1] / 4Pi. Here tt is [omat] for type=1 and                
-c 1-[omat] for type=2. mat is matrix of physical size (np2,np3,np1) and         
-c real size (nr2,nr3,nr1). omat and vec1 are matrices of physical size          
-c (np2,np1) and real size (nr2,nr1). q1 is a matrix of physical size            
-c (np2,np3) and real size (nr2,nr3)                                             
-c 1, 2 and 3 correspond to nY, nL and nP.              [Z.I., Nov. 1995]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine evaluates the following expression:                           
+c     [q1] = [mat]*[tt*vec1] / 4Pi. Here tt is [omat] for type=1 and                
+c     1-[omat] for type=2. mat is matrix of physical size (np2,np3,np1) and         
+c     real size (nr2,nr3,nr1). omat and vec1 are matrices of physical size          
+c     (np2,np1) and real size (nr2,nr1). q1 is a matrix of physical size            
+c     (np2,np3) and real size (nr2,nr3)                                             
+c     1, 2 and 3 correspond to nY, nL and nP.              [Z.I., Nov. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -10802,20 +10717,18 @@ c         loop over dummy index (multiplication)
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE MYSPLINE(x,N,alpha,beta,gamma,delta)                           
-c =======================================================================       
-c This subroutine finds arrays alpha, beta, gamma and delta describing          
-c a cubic spline approximation of an unknown function f(x) given as an          
-c array f(i)=f(x(i)) with i=1..N. The cubic spline approximation is:            
-c f(x)=a(i) + b(i)*t + c(i)*t^2 + d(i)*t^3  for x(i).LE.x.LE.x(i+1)             
-c and t = (x-x(i))/(x(i+1)-x(i)), i=1..N-1. Coefficients a,b,c,d are            
-c equal to:                                                                     
-c a(i) = alpha(i,1)*f(1) + alpha(i,2)*f(2) + ... + alpha(i,N)*f(N)              
-c and b,c,d analogously.                               [Z.I., Dec. 1995]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine finds arrays alpha, beta, gamma and delta describing          
+c     a cubic spline approximation of an unknown function f(x) given as an          
+c     array f(i)=f(x(i)) with i=1..N. The cubic spline approximation is:            
+c     f(x)=a(i) + b(i)*t + c(i)*t^2 + d(i)*t^3  for x(i).LE.x.LE.x(i+1)             
+c     and t = (x-x(i))/(x(i+1)-x(i)), i=1..N-1. Coefficients a,b,c,d are            
+c     equal to:                                                                     
+c     a(i) = alpha(i,1)*f(1) + alpha(i,2)*f(2) + ... + alpha(i,N)*f(N)              
+c     and b,c,d analogously.                               [Z.I., Dec. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -10858,10 +10771,9 @@ c     generate alpha, beta, gamma, delta
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE polint(xa,ya,n,x,y,dy)                                         
-c =======================================================================       
+c     =======================================================================       
       INTEGER n,NMAX                                                            
       DOUBLE PRECISION dy,x,y,xa(n),ya(n)                                       
       PARAMETER (NMAX=10)                                                       
@@ -10903,17 +10815,16 @@ c =======================================================================
 
       RETURN                                                                    
       END                                                                       
-
                                                                                 
 
       SUBROUTINE PowerInt(N,N1,N2,x,y,integral)                                 
-c =======================================================================       
-c This subroutine calculates integral I(y(x)*dx). Both y and x are              
-c 1D arrays, y(i), x(i) with i=1,N (declared with NN). Lower and upper          
-c integration limits are x(N1) and x(N2), respectively. The method used         
-c is a power-law approximation for y(x) between any two points .                
-c                                                      [Z.I., Mar. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine calculates integral I(y(x)*dx). Both y and x are              
+c     1D arrays, y(i), x(i) with i=1,N (declared with NN). Lower and upper          
+c     integration limits are x(N1) and x(N2), respectively. The method used         
+c     is a power-law approximation for y(x) between any two points .                
+c                                                          [Z.I., Mar. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER i, N, N1, N2                                                      
       DOUBLE PRECISION x(N), y(N), integral, pow, C, delint                     
@@ -10937,15 +10848,13 @@ c        integral = 0.0
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE DoProduct(NN,Yt,pt,p0,j,Prd)                                     
-c =======================================================================       
-c This is an auxiliary subroutine which evaluates a messy expression            
-c needed to calculate normalization constants for a broken power law            
-c density.                                             [Z.I., Aug. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This is an auxiliary subroutine which evaluates a messy expression            
+c     needed to calculate normalization constants for a broken power law            
+c     density.                                             [Z.I., Aug. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER NN, i, j                                                          
       DOUBLE PRECISION Yt(NN), pt(NN), Prd, p0                                  
@@ -10960,18 +10869,17 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE ROMBERG2(a,b,ss8)                                              
-c =======================================================================       
-c This subroutine performs Romberg integration of 8 functions calculated        
-c in trapzd2 (by calling subroutine TWOFUN) on interval [a,b].                  
-c The results are returned in ss8(1..8). Desired accuracy accRomb is            
-c user supplied and comes through COMMON /numerics/ read in from                
-c 'numerics.inc'. This subroutine is based on slightly changed versions         
-c of 'qromb' and 'qromo' from Numerical Recipes.                                
-c                                                    [MN & ZI,Aug'96]           
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine performs Romberg integration of 8 functions calculated        
+c     in trapzd2 (by calling subroutine TWOFUN) on interval [a,b].                  
+c     The results are returned in ss8(1..8). Desired accuracy accRomb is            
+c     user supplied and comes through COMMON /numerics/ read in from                
+c     'numerics.inc'. This subroutine is based on slightly changed versions         
+c     of 'qromb' and 'qromo' from Numerical Recipes.                                
+c                                                        [MN & ZI,Aug'96]           
+c     =======================================================================       
       INTEGER Ncav, Nins                                                        
       DOUBLE PRECISION accRomb, accuracy, accConv, delTAUsc, facc,              
      &                 dynrange, EtaRat, accFbol                                
@@ -11030,15 +10938,13 @@ c              predict the integral for stepsize h->h0=0.0
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE ROMBY(fnc,a,b,ss)                                              
-c =======================================================================       
-c This subroutine performs Romberg integration of function func on              
-c interval [a,b]. The result is returned in ss. Desired accuracy is set         
-c to 0.002.                                            [Z.I., Feb. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine performs Romberg integration of function func on              
+c     interval [a,b]. The result is returned in ss. Desired accuracy is set         
+c     to 0.002.                                            [Z.I., Feb. 1996]        
+c     =======================================================================       
       INTEGER JMAX,JMAXP,K,KM, J                                                
       PARAMETER (JMAX=30, JMAXP=JMAX+1, K=3, KM=K-1)                            
       DOUBLE PRECISION a,b,fnc,ss,EPS, aux, dss,h(JMAXP),s(JMAXP)               
@@ -11060,14 +10966,12 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE ScaleTo1(Nmax,N,Y)                                             
-c =======================================================================       
-c This subroutine scales vector Y such that Y(1) = 1.0                          
-c                                                      [Z.I., Jan. 1997]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine scales vector Y such that Y(1) = 1.0                          
+c                                                          [Z.I., Jan. 1997]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER Nmax, N, i                                                        
       DOUBLE PRECISION Y(Nmax), Scale                                           
@@ -11080,12 +10984,11 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE SHIFT(X,Nmax,N,Xins,i)                                         
-c =======================================================================       
-c Rearranges a vector X by inserting a new element Xins.    [MN, Aug'96]        
-c =======================================================================       
+c     =======================================================================       
+c     Rearranges a vector X by inserting a new element Xins.    [MN, Aug'96]        
+c     =======================================================================       
       implicit none                                                             
       integer Nmax, N, i,j                                                      
       DOUBLE PRECISION X(Nmax),Xins                                             
@@ -11098,17 +11001,15 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE SIMPSON(N,N1,N2,x,y,integral)                                  
-c =======================================================================       
-c This subroutine calculates integral I(y(x)*dx). Both y and x are              
-c 1D arrays, y(i), x(i) with i=1,N (declared with NN). Lower and upper          
-c integration limits are x(N1) and x(N2), respectively. The method used         
-c is Simpson (trapezoid) approximation. The resulting integral is sum of        
-c y(i)*wgth, i=N1,N2.                                  [Z.I., Mar. 1996]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine calculates integral I(y(x)*dx). Both y and x are              
+c     1D arrays, y(i), x(i) with i=1,N (declared with NN). Lower and upper          
+c     integration limits are x(N1) and x(N2), respectively. The method used         
+c     is Simpson (trapezoid) approximation. The resulting integral is sum of        
+c     y(i)*wgth, i=N1,N2.                                  [Z.I., Mar. 1996]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER i, N, N1, N2                                                      
       DOUBLE PRECISION x(N), y(N), wgth, integral                               
@@ -11135,10 +11036,9 @@ c         add contribution to the integral
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE SORT(RA,N)                                                     
-c =======================================================================       
+c     =======================================================================       
       INTEGER N                                                                 
       DOUBLE PRECISION RA(N)                                                    
 
@@ -11177,10 +11077,9 @@ c =======================================================================
 
       END                                                                       
 
-                                                                                
 
       SUBROUTINE Spline(x,y,n,yp1,ypn,y2)                                       
-c =======================================================================       
+c     =======================================================================       
       INTEGER n,NMAX                                                            
       DOUBLE PRECISION yp1,ypn,x(n),y(n),y2(n)                                  
       PARAMETER (NMAX=500)                                                      
@@ -11217,16 +11116,14 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
-                                                                                
 
       SUBROUTINE SPLINE2(x,fun,N,coef)                                          
-c =======================================================================       
-c This subroutine finds coefficients coef(i,j) such that                        
-c fun(x)=coef(i,1) + coef(i,2)*x + coef(i,3)*x^2 + coef(i,4)*x^3                
-c for x(i).LE.x.LE.x(i+1) is a cubic spline approximation of fun(x),            
-c with i=1..N.                                         [Z.I., Feb. 1995]        
-c =======================================================================       
+c     =======================================================================       
+c     This subroutine finds coefficients coef(i,j) such that                        
+c     fun(x)=coef(i,1) + coef(i,2)*x + coef(i,3)*x^2 + coef(i,4)*x^3                
+c     for x(i).LE.x.LE.x(i+1) is a cubic spline approximation of fun(x),            
+c     with i=1..N.                                         [Z.I., Feb. 1995]        
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -11259,10 +11156,9 @@ c     generate coef(i,j), j=1,2,3,4
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE splint(xa,ya,y2a,n,x,y)                                        
-c =======================================================================       
+c     =======================================================================       
       INTEGER n                                                                 
       DOUBLE PRECISION x,y,xa(n),y2a(n),ya(n)                                   
       INTEGER k,khi,klo                                                         
@@ -11289,10 +11185,9 @@ c =======================================================================
       return                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE trapzd(func,a,b,s,n)                                           
-c =======================================================================       
+c     =======================================================================       
       INTEGER n                                                                 
       DOUBLE PRECISION a,b,s,func                                               
       EXTERNAL func                                                             
@@ -11317,10 +11212,9 @@ c =======================================================================
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE WriteOut(is,nG,nameQ,nameNK)                                   
-c =======================================================================       
+c     =======================================================================       
       IMPLICIT none                                                             
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
@@ -11482,10 +11376,9 @@ c      2.3 Dust temperature on inner boundary
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       SUBROUTINE zbrac(func,x1,x2,Ntry,succes)                                  
-c =======================================================================       
+c     =======================================================================       
       INTEGER NTRY, succes                                                      
       DOUBLE PRECISION x1,x2,func,FACTOR                                        
       EXTERNAL func                                                             
@@ -11518,10 +11411,9 @@ c     IF's added to prevent breaking of slab case on DEC [MN,Jun'99]
       RETURN                                                                    
       END                                                                       
 
-                                                                                
 
       DOUBLE PRECISION FUNCTION zriddr(func,x1,x2,MAXIT,xacc)                   
-c =======================================================================       
+c     =======================================================================       
       INTEGER MAXIT                                                             
       DOUBLE PRECISION x1,x2,xacc,func,UNUSED                                   
       PARAMETER (UNUSED=-1.11E30)                                               
