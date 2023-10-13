@@ -256,16 +256,21 @@ c =====================================================================
 c =====================================================================         
                                                                                 
 c **********************************************************************        
-      program Dusty                                                             
-c     =====================================================================         
-c     This program solves the continuum radiative transfer problem for a            
-c     spherically symmetric envelope or for a plane-parallel slab. Only this        
-c     file needs to be compiled. It is assumed that all input data are given        
-c     in files named *.inp, and that the list of these files is given in a          
-c     master input file dusty.inp. For details see the Manual.                      
-c                                                           [Z.I. and M.N.]         
-c     ======================================================================        
-      IMPLICIT none                                                             
+      PROGRAM Dusty                                                             
+C     ========================================
+C     DUSTY Radiative Transfer Code
+C     ========================================
+C     
+C     This program solves the continuum radiative transfer problem for a
+C     spherically symmetric envelope or for a plane-parallel slab. All input
+C     data are read from files named *.inp, listed in the master input file dusty.inp.
+C     For detailed information, refer to the Manual.
+C     
+C     Authors: [Z.I. and M.N.]
+C
+C ========================================
+      IMPLICIT NONE
+      CHARACTER*3 version                                                                                                                          
       INTEGER npY, npP, npL, npG                                                
       INCLUDE 'userpar.inc'                                                     
       PARAMETER (npG=1)                                                         
@@ -316,146 +321,145 @@ c     ======================================================================
       COMMON /output/ LambdaOut, ConvInt, Visib, Offset, qtheta1,               
      &      Te_min, iPSF, NlambdaOut, iINP, iSUM, iOUT, iVerb, iSPP,            
      &      iA, iB, iC, iX, iInn, iV, Nconv, Nvisi, zline                       
-      CHARACTER*3 version                                                       
       CHARACTER*230 path, apath                                                 
       CHARACTER*235 nameIn, nameOut, nameQ(npG), nameNK(10)                     
       INTEGER error, nG, model, Nmodel, GridType, io1, Empty, lpath,            
      &        iL, Nrec, Nlam                                                    
-c     Nrec is the max number of records for TAUgrid in a file                   
+C     Nrec is the max number of records for TAUgrid in a file                   
       PARAMETER (Nrec = 1000)                                                   
       DOUBLE PRECISION ETAzp(npP,npY), TAUin(Nrec), TAU1, TAU2, RDINP           
       LOGICAL Equal                                                             
-      Equal = .True.                                                            
-c ----------------------------------------------------------------------        
-c     **************************                                                
-c     *** ABOUT THIS VERSION ***                                                
-c     **************************                                                
+      Equal = .TRUE.                                                            
+C ----------------------------------------------------------------------        
+C     **************************                                                
+C     *** ABOUT THIS VERSION ***                                                
+C     **************************                                                
       version= '2.01'                                                            
-c     Updated versions of Dusty(2.0) with minor changes and bug fixes
-c     start from 2.01.
+C     Updated versions of Dusty(2.0) with minor changes and bug fixes
+C     start from 2.01.
 
-c     Version (2.0) is the first public release. The code has been              
-c     significantly improved in terms of speed and I/O options. All             
-c     suggestions of the users of version(1.0) had been taken into              
-c     consideration. Finished Oct.'99                                           
+C     Version (2.0) is the first public release. The code has been              
+C     significantly improved in terms of speed and I/O options. All             
+C     suggestions of the users of version(1.0) had been taken into              
+C     consideration. Finished Oct.'99                                           
                                                                                 
-c     Version 1.0 is a beta version sent to a few people before the             
-c     first public release.  Finished Nov,'96.                                  
-c **********************************************************************        
-c     *** MAIN ***                                                              
-c     first open the file with lambda grid and check that the grid satisfies    
-c     certain conditions (the wavelengths are in microns) :                     
-      open(4, file='lambda_grid.dat', status = 'OLD')                           
+C     Version 1.0 is a beta version sent to a few people before the             
+C     first public release.  Finished Nov,'96.                                  
+C **********************************************************************        
+C     *** MAIN ***                                                              
+C     first open the file with lambda grid and check that the grid satisfies    
+C     certain conditions (the wavelengths are in microns) :                     
+      OPEN(4, FILE='lambda_grid.dat', STATUS = 'OLD')                           
       Nlam = RDINP(Equal,4)                                                     
       IF (Nlam.NE.npL) THEN                                                     
-       write(*,*)' *************** A BIG ERROR !!! ***************** '          
-       write(*,*)'  The number of wavelengths in lambda_grid.dat is  '          
-       write(*,*)'  not equal to the specified npL in userpar.inc    '          
-       write(*,*)'  Make sure the numbers are the same, recompile    '          
-       write(*,*)'  and try again.                                   '          
-       write(*,*)' ************************************************* '          
-       goto 999                                                                 
+        WRITE(*,*)' *************** A BIG ERROR !!! ***************** '          
+        WRITE(*,*)'  The number of wavelengths in lambda_grid.dat is  '          
+        WRITE(*,*)'  not equal to the specified npL in userpar.inc    '          
+        WRITE(*,*)'  Make sure the numbers are the same, recompile    '          
+        WRITE(*,*)'  and try again.                                   '          
+        WRITE(*,*)' ************************************************* '          
+        GOTO 999                                                                 
       END IF                                                                    
-c     Initialize lambda array                                                   
-      read(4,*,END=99) (lambda(iL), iL = 1, npL)                                
- 99   close(4)                                                                 
-      CALL sort(lambda,npL)                                                     
-c     Check the ends of the lambda grid :                                       
+C     Initialize lambda array                                                   
+      READ(4,*,END=99) (lambda(iL), iL = 1, npL)                                
+ 99   CLOSE(4)                                                                 
+      CALL SORT(lambda,npL)                                                     
+C     Check the ends of the lambda grid :                                       
       IF(lambda(1).GT.0.01) THEN                                                
-       write(*,*)' *************** WARNING! ********************** '            
-       write(*,*)'  The shortest wavelength in lambda_grid.dat has '            
-       write(*,*)'  to be 0.01 microns. Correct this and try again!'            
-       write(*,*)' *********************************************** '            
-       goto 999                                                                 
+        WRITE(*,*)' *************** WARNING! ********************** '            
+        WRITE(*,*)'  The shortest wavelength in lambda_grid.dat has '            
+        WRITE(*,*)'  to be 0.01 microns. Correct this and try again!'            
+        WRITE(*,*)' *********************************************** '            
+        GOTO 999                                                                 
       END IF                                                                    
       IF(lambda(npL).LT.36000.) THEN                                            
-       write(*,*)' *************** WARNING! ******************* '               
-       write(*,*)'  The longest wavelength in lambda_grid.dat   '               
-       write(*,*)'  has to be 36 mm. Correct this and try again!'               
-       write(*,*)' ******************************************** '               
-       goto 999                                                                 
+        WRITE(*,*)' *************** WARNING! ******************* '               
+        WRITE(*,*)'  The longest wavelength in lambda_grid.dat   '               
+        WRITE(*,*)'  has to be 36 mm. Correct this and try again!'               
+        WRITE(*,*)' ******************************************** '               
+        GOTO 999                                                                 
       END IF                                                                    
-c     Check the resolution:                                                     
+C     Check the resolution:                                                     
       DO iL = 2, npL                                                            
         IF (lambda(iL)/lambda(iL-1).GT.1.51) THEN                               
-          write(*,*)' ***************** WARNING!  *******************'          
-          write(*,*)' The ratio of two consecutive wavelengths in the'          
-          write(*,*)' grid has to be no bigger than 1.5. You have    '          
-          write(*,'(2(a4,1p,e8.2))') '    ',lambda(iL)/lambda(iL-1),            
+          WRITE(*,*)' ***************** WARNING!  *******************'          
+          WRITE(*,*)' The ratio of two consecutive wavelengths in the'          
+          WRITE(*,*)' grid has to be no bigger than 1.5. You have    '          
+          WRITE(*,'(2(a4,1p,e8.2))') '    ',lambda(iL)/lambda(iL-1),            
      &                                ' at ', lambda(iL)                        
-          write(*,*)' Correct this and try again!                    '          
-          write(*,*)' ***********************************************'          
-          goto 999                                                              
+          WRITE(*,*)' Correct this and try again!                    '          
+          WRITE(*,*)' ***********************************************'          
+          GOTO 999                                                              
         END IF                                                                  
       END DO                                                                    
-c     open master input file dusty.inp                                          
-      open(13,ERR=998,file='dusty.inp',STATUS='OLD')                            
+C     open master input file dusty.inp                                          
+      OPEN(13,ERR=998,FILE='dusty.inp',STATUS='OLD')                            
       io1 = 0                                                                   
-c     loop over input files                                                     
+C     loop over input files                                                     
       DO WHILE (io1.GE.0)                                                       
-c       read a line from master input file using                                
-100     read(13,'(a)',iostat=io1) apath                                         
-        if(io1.lt.0) then                                                       
-         stop                                                                   
-        end if                                                                  
-        CALL Clean(apath, path, lpath)                                          
-c       if not EOF and if line is not empty, or commented, proceed              
-        IF (Empty(path).NE.1) THEN                                              
-c         get input/output file names                                           
+C       read a line from master input file using                                
+100     READ(13,'(a)',iostat=io1) apath                                         
+        IF(io1.LT.0) THEN                                                       
+          STOP                                                                   
+        END IF                                                                  
+        CALL CLEAN(apath, path, lpath)                                          
+C       if not EOF and if line is not empty, or commented, proceed              
+        IF (EMPTY(path).NE.1) THEN                                              
+C         get input/output file names                                           
           CALL ATTACH(path,lpath,'.inp',nameIn)                                 
           CALL ATTACH(path,lpath,'.out',nameOut)                                
-c         read input data                                                       
-          CALL Input(nameIn,nG,nameOut,nameQ,nameNK,                            
+C         read input data                                                       
+          CALL INPUT(nameIn,nG,nameOut,nameQ,nameNK,                            
      &               TAU1,TAU2,TAUin,Nrec,GridType,Nmodel,error,version)        
            IF (iVerb.GT.0)                                                      
-     &          write(*,'(a24,a80)') ' Working on Input File: ',nameIn          
-           IF (iVerb.EQ.2) write(*,*) 'Done with Reading Input'                 
-c         if an error reading files go to the next input file                   
-c         error=3 means some files are missing                                  
-          IF (error.EQ.3) goto 100                                              
-c         get optical properties                                                
-          CALL getOptPr(nG,nameQ,nameNK,error)                                  
-c         if an error reading files go to the next input file                   
-          IF (error.EQ.3) goto 100                                              
-          IF (iVerb.EQ.2) write(*,*) 'Done with getOptPr'                       
-c         solve for every model                                                 
+     &          WRITE(*,'(a24,a80)') ' Working on Input File: ',nameIn          
+           IF (iVerb.EQ.2) WRITE(*,*) 'Done with Reading Input'                 
+C         if an error reading files go to the next input file                   
+C         error=3 means some files are missing                                  
+          IF (error.EQ.3) GOTO 100                                              
+C         get optical properties                                                
+          CALL GETOPTPR(nG,nameQ,nameNK,error)                                  
+C         if an error reading files go to the next input file                   
+          IF (error.EQ.3) GOTO 100                                              
+          IF (iVerb.EQ.2) WRITE(*,*) 'Done with GETOPTPR'                       
+C         solve for every model                                                 
           DO model = 1, Nmodel                                                  
-           IF (iVerb.GT.0)  write(*,'(a9,i4)') ' model = ',model                
+           IF (iVerb.GT.0)  WRITE(*,'(a9,i4)') ' model = ',model                
            IF (error.EQ.0) THEN                                                 
-c            open output files                                                  
-             CALL Oppen(model,path,lpath)                                       
-c            calculate optical depth for current model                          
-             CALL GetTau(model,nG,TAU1,TAU2,TAUin,Nrec,GridType,Nmodel)         
+C            open output files                                                  
+             CALL OPPEN(model,path,lpath)                                       
+C            calculate optical depth for current model                          
+             CALL GETTAU(model,nG,TAU1,TAU2,TAUin,Nrec,GridType,Nmodel)         
              IF (iVerb.EQ.2)                                                    
-     &          write(*,*) 'Done with GetTau. Going to Solve'                   
-c            solve                                                              
-             CALL Solve(model,nG,error,ETAzp)                                   
+     &          WRITE(*,*) 'Done with GETTAU. Going to Solve'                   
+C            solve                                                              
+             CALL SOLVE(model,nG,error,ETAzp)                                   
              IF (error.EQ.0) THEN                                               
-c              calculate spectral characteristics                               
-               CALL Spectral(model,denstyp,nL,Lambda)                           
-c              write results out                                                
-               CALL PrOut(model)                                                
+C              calculate spectral characteristics                               
+               CALL SPECTRAL(model,denstyp,nL,Lambda)                           
+C              write results out                                                
+               CALL PROUT(model)                                                
              ELSE                                                               
-              goto 100                                                          
+              GOTO 100                                                          
              END IF                                                             
-c            close output files                                                 
-             CALL Cllose(error,model,Nmodel)                                    
+C            close output files                                                 
+             CALL CLLOSE(error,model,Nmodel)                                    
            END IF                                                               
-           IF (iVerb.EQ.2) write(*,*) ' ----------- '                           
-           IF (iVerb.EQ.2) write(*,*) '    '                                    
-c         end of the loop over models                                           
+           IF (iVerb.EQ.2) WRITE(*,*) ' ----------- '                           
+           IF (iVerb.EQ.2) WRITE(*,*) '    '                                    
+C         end of the loop over models                                           
           END DO                                                                
         END IF                                                                  
-c     end of the loop over input files                                          
+C     end of the loop over input files                                          
       END DO                                                                    
-      IF (iVerb.GT.0) write(*,*) ' End of Input Files '                         
-      close(13)                                                                 
-c     end this run                                                              
-      goto 999                                                                  
-c     to execute if the master input file is missing                            
-998   write(*,*)' *********** FATAL ERROR IN DUSTY ***********'                 
-      write(*,*)' * Master input file dusty.inp is missing!? *'                 
-      write(*,*)' ********************************************'                 
-c ----------------------------------------------------------------------        
+      IF (iVerb.GT.0) WRITE(*,*) ' End of Input Files '                         
+      CLOSE(13)                                                                 
+C     end this run                                                              
+      GOTO 999                                                                  
+C     to execute if the master input file is missing                            
+998   WRITE(*,*)' *********** FATAL ERROR IN DUSTY ***********'                 
+      WRITE(*,*)' * Master input file dusty.inp is missing!? *'                 
+      WRITE(*,*)' ********************************************'                 
+C ----------------------------------------------------------------------        
 999   STOP                                                                      
       END                                                                       
