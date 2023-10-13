@@ -330,25 +330,25 @@ C     Nrec is the max number of records for TAUgrid in a file
       DOUBLE PRECISION ETAzp(npP,npY), TAUin(Nrec), TAU1, TAU2, RDINP           
       LOGICAL Equal                                                             
       Equal = .TRUE.                                                            
-C ----------------------------------------------------------------------        
-C     **************************                                                
-C     *** ABOUT THIS VERSION ***                                                
-C     **************************                                                
-      version= '2.01'                                                            
+C     =======================
+C     About This Version
+C     =======================
+      version= '2.01'
 C     Updated versions of Dusty(2.0) with minor changes and bug fixes
 C     start from 2.01.
+C     Version (2.0) is the first public release. The code has been
+C     significantly improved in terms of speed and I/O options. All
+C     suggestions of the users of version(1.0) had been taken into
+C     consideration. Finished Oct.'99
 
-C     Version (2.0) is the first public release. The code has been              
-C     significantly improved in terms of speed and I/O options. All             
-C     suggestions of the users of version(1.0) had been taken into              
-C     consideration. Finished Oct.'99                                           
-                                                                                
-C     Version 1.0 is a beta version sent to a few people before the             
-C     first public release.  Finished Nov,'96.                                  
-C **********************************************************************        
-C     *** MAIN ***                                                              
-C     first open the file with lambda grid and check that the grid satisfies    
-C     certain conditions (the wavelengths are in microns) :                     
+C     Version 1.0 is a beta version sent to a few people before the
+C     first public release. Finished Nov,'96.
+
+C     ========================
+C     Main
+C     ========================
+C     First, open the file with the lambda grid and check that the grid satisfies
+C     certain conditions (the wavelengths are in microns):
       OPEN(4, FILE='lambda_grid.dat', STATUS = 'OLD')                           
       Nlam = RDINP(Equal,4)                                                     
       IF (Nlam.NE.npL) THEN                                                     
